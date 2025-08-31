@@ -1,11 +1,15 @@
 import { Fragment } from 'react'
 
-function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart}) {
+function Header({
+    cart, 
+    removeFromCart, 
+    increaseQuantity, 
+    decreaseQuantity, 
+    clearCart,
+    isEmpity,
+    cartTotal
+}) {
 
-    // State Devirvado
-    const isEmpity = () => cart.length === 0;
-    const cartTotal = () => cart.reduce(
-        (total, item) => total + (item.quantity * item.price), 0);
         
   return (
     <Fragment>
@@ -25,7 +29,7 @@ function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clear
 
                             <div id="carrito" className="bg-white p-3">
 
-                              {isEmpity() ? (
+                              {isEmpity ? (
                                 <p className="text-center">El carrito esta vacio</p>
                               ) : (
                                 
@@ -85,7 +89,7 @@ function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clear
                                         </tbody>
                                     </table>
 
-                                    <p className="text-end">Total pagar: <span className="fw-bold">$ {cartTotal()}</span></p>
+                                    <p className="text-end">Total pagar: <span className="fw-bold">$ {cartTotal}</span></p>
                                     <button 
                                         className="btn btn-dark w-100 mt-3 p-2"
                                         onClick={clearCart}>
