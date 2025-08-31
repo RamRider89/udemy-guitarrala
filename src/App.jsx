@@ -5,24 +5,22 @@ import { db } from "./data/db"
 
 function App() {
 
+    const initialCart = () => {
+        const localStorageCart = localStorage.getItem('cart')
+        return localStorageCart ? JSON.parse(localStorageCart) : []
+    }
+
     // State
-    const [auth, setAuth] = useState(true);
-    const [total, setTotal] = useState(0);
-    const [cart, setCart] = useState([]);
-    const [data, setData] = useState(db);
+    const [data] = useState(db);
+    const [cart, setCart] = useState(initialCart);
+
     const MAX_ITEMS = 5;
     const MIN_ITEMS = 1;
 
 
     useEffect(() => {
-        console.log("LISTO esuchando auth: " + auth);     
-    }, [auth]);
-
-    setTimeout(() => {
-        setAuth(false);
-    }, 3000);
-    
-    //console.log(data);
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
 
     function addToCart(item) {
 
@@ -76,7 +74,6 @@ function App() {
     function clearCart(){
         setCart([])
     }
-    
     
 
     return (
